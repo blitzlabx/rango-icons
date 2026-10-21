@@ -3,22 +3,22 @@ name: Unzip Files Automatically
 on:
   push:
     paths:
-      - '**.zip' # Triggers whenever a .zip file is pushed to the repo
-  workflow_dispatch: # Allows you to manually trigger it from the "Actions" tab
+      - '**.zip'
+  workflow_dispatch:
 
 jobs:
   unzip-and-commit:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Double-checks write access for safety
+      contents: write
 
     steps:
       - name: Checkout repository code
         uses: actions/checkout@v4
 
-      - name: Unzip archive and clean up
+      - name: Unzip archive, flatten folder, and clean up
         run: |
-          # Finds any zip file in the repo root, extracts it, then deletes the zip
+          # 1. Unzip the file
           for f in *.zip; do
             if [ -f "$f" ]; then
               echo "Extracting $f..."
@@ -27,15 +27,29 @@ jobs:
             fi
           done
 
+          # 2. Fix the nested folder issue automatically
+          # This finds any newly created folder (excluding hidden .git folders)
+          FOLDER_NAME=$(find . -maxdepth 1 -type d ! -name '.' ! -name '.*' | head -n 1)
+          
+          if [ -n "$FOLDER_NAME" ]; then
+            echo "Found nested folder: $FOLDER_NAME. Moving files out..."
+            
+            # Move everything inside that folder to the current directory
+            mv "$FOLDER_NAME"/* . 2>/dev/null || true
+            mv "$FOLDER_NAME"/.* . 2>/dev/null || true  # Moves hidden files if any
+            
+            # Delete the now-empty folder
+            rm -rf "$FOLDER_NAME"
+          fi
+
       - name: Commit and Push 9,000+ files
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.email "github-actions[bot]@://github.com"
           git config --local user.name "github-actions[bot]"
           git add .
           
-          # Only commit if there are changes to avoid workflow errors
           if ! git diff --cached --quiet; then
-            git commit -m "Automatically unzipped 9,000+ files via GitHub Action"
+            git commit -m "Automatically unzipped and flattened 9,000+ files"
             git push origin HEAD:${{ github.ref }}
           else
             echo "No new files to commit."
