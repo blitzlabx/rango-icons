@@ -1,0 +1,43 @@
+name: Unzip Files Automatically
+
+on:
+  push:
+    paths:
+      - '**.zip' # Triggers whenever a .zip file is pushed to the repo
+  workflow_dispatch: # Allows you to manually trigger it from the "Actions" tab
+
+jobs:
+  unzip-and-commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Double-checks write access for safety
+
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+
+      - name: Unzip archive and clean up
+        run: |
+          # Finds any zip file in the repo root, extracts it, then deletes the zip
+          for f in *.zip; do
+            if [ -f "$f" ]; then
+              echo "Extracting $f..."
+              unzip -o "$f"
+              rm "$f"
+            fi
+          done
+
+      - name: Commit and Push 9,000+ files
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          
+          # Only commit if there are changes to avoid workflow errors
+          if ! git diff --cached --quiet; then
+            git commit -m "Automatically unzipped 9,000+ files via GitHub Action"
+            git push origin HEAD:${{ github.ref }}
+          else
+            echo "No new files to commit."
+          fi
+          
