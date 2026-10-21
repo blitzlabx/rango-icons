@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1d14"/><stop offset="1" stop-color="#0d0906"/></linearGradient>
+<linearGradient id="ac" gradientUnits="userSpaceOnUse" x1="116" y1="116" x2="396" y2="396"><stop offset="0" stop-color="#ffd9a8"/><stop offset=".45" stop-color="#ff9838"/><stop offset="1" stop-color="#e8660d"/></linearGradient>
+<linearGradient id="rg" gradientUnits="userSpaceOnUse" x1="40" y1="40" x2="472" y2="472"><stop offset="0" stop-color="#ffb067" stop-opacity=".9"/><stop offset=".5" stop-color="#8a4210" stop-opacity=".28"/><stop offset="1" stop-color="#8a4210" stop-opacity=".6"/></linearGradient>
+<radialGradient id="gl" gradientUnits="userSpaceOnUse" cx="256" cy="250" r="205"><stop offset="0" stop-color="#ff8c2e" stop-opacity=".24"/><stop offset="1" stop-color="#ff8c2e" stop-opacity="0"/></radialGradient>
+<linearGradient id="sh" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".09"/><stop offset=".42" stop-color="#fff" stop-opacity=".02"/><stop offset=".52" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+</defs>
+<rect x="16" y="16" width="480" height="480" rx="112" fill="url(#bg)"/>
+<circle cx="256" cy="252" r="205" fill="url(#gl)"/>
+<rect x="16" y="16" width="480" height="480" rx="112" fill="url(#sh)"/>
+<rect x="17.5" y="17.5" width="477" height="477" rx="110.5" fill="none" stroke="url(#rg)" stroke-width="3.5"/>
+<g fill="none" stroke="url(#ac)" stroke-width="51.8" stroke-linecap="round" stroke-linejoin="round" opacity=".26"><path d="M 233.6 177.6 A 22.4 22.4 0 0 1 278.4 177.6 V 272.8 A 39.2 39.2 0 1 1 233.6 272.8 Z" fill="none"/><circle cx="256" cy="289.6" r="16.8" fill="url(#ac)" stroke="none"/><line x1="256" y1="272.8" x2="256" y2="239.2"/><line x1="312" y1="200" x2="351.2" y2="200"/><line x1="312" y1="233.6" x2="340" y2="233.6"/><line x1="312" y1="267.2" x2="351.2" y2="267.2"/></g>
+<g fill="none" stroke="url(#ac)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"><path d="M 233.6 177.6 A 22.4 22.4 0 0 1 278.4 177.6 V 272.8 A 39.2 39.2 0 1 1 233.6 272.8 Z" fill="none"/><circle cx="256" cy="289.6" r="16.8" fill="url(#ac)" stroke="none"/><line x1="256" y1="272.8" x2="256" y2="239.2"/><line x1="312" y1="200" x2="351.2" y2="200"/><line x1="312" y1="233.6" x2="340" y2="233.6"/><line x1="312" y1="267.2" x2="351.2" y2="267.2"/></g>
+</svg>
